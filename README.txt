@@ -1,7 +1,7 @@
-Nom(s)
-Numéro(s) d'étudiant
-Cote du cours
-Numéro du devoir
+Hrithik Shah, Soorya Saravanapavan
+300069290, 300065226
+ITI 1121-A
+2
 
 * Intégrité dans les études
 
@@ -26,10 +26,10 @@ En soumettant ce devoir, je certifie que:
 
 ***
 
-Your name(s)
-Student Number(s)
-Course number and section, if applicable, i.e. ITI 1121-A
-The assignment number
+Hrithik Shah, Soorya Saravanapavan
+300069290, 300065226
+ITI 1121-A
+2
 
 * Academic Integrity
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * an instance of <b>ArrayList&lt;Solution&gt;</b>
  * to store the elements of the queue.
  *
- * @author Guy-Vincent Jourdan, University of Ottawa
+ * @author GVJ, Hrithik, Soorya all from uOttawa
  */
 public class ArrayListSolutionQueue implements SolutionQueue {
 
@@ -24,6 +24,7 @@ public class ArrayListSolutionQueue implements SolutionQueue {
     public ArrayListSolutionQueue() {
 
         //Your code here
+        queue = new ArrayList<Solution>();
         
     }
 
@@ -36,7 +37,7 @@ public class ArrayListSolutionQueue implements SolutionQueue {
     public void enqueue(Solution value) {
 
         //Your code here
-        
+        queue.add(value);
     }
 
     /**
@@ -48,7 +49,7 @@ public class ArrayListSolutionQueue implements SolutionQueue {
     public Solution dequeue() {
 
         //Your code here
-        
+        return queue.remove(0);
     }
 
     /**
@@ -60,7 +61,7 @@ public class ArrayListSolutionQueue implements SolutionQueue {
     public boolean isEmpty() {
 
         //Your code here
-        
+        return (queue.size() == 0);
     }
 
 }

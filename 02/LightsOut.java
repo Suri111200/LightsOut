@@ -1,19 +1,21 @@
 import java.util.ArrayList;
+import java.util.Queue;
 
 
-/**
+/*
  * The class <b>LightsOut</b> is the
  * class that implements the method to
  * computs solutions of the Lights Out game.
  * It contains the main of our application.
  *
- * @author Guy-Vincent Jourdan, University of Ottawa
+ * @author GVJ, Hrithik, Soorya at uOttawa
  */
 
 public class LightsOut {
 
     // Your variables here
-
+    static ArrayListSolutionQueue partialSolutions; 
+    //static ArrayList<Solution> solutions = new ArrayList<>();
 
     /**
      * The method <b>solve</b> finds all the 
@@ -25,10 +27,6 @@ public class LightsOut {
      * It returns an <b>ArrayList&lt;Solution&gt;</b> 
      * containing all the valid solutions to the 
      * problem.
-     *
-     * This version does not continue exploring a 
-     * partial solution that is known to be
-     * impossible
      *
      * During the computation of the solution, the 
      * method prints out a message each time a new 
@@ -46,7 +44,33 @@ public class LightsOut {
     public static ArrayList<Solution> solve(int width, int height){
 
         //Your code here
-        
+        partialSolutions = new ArrayListSolutionQueue();
+        ArrayList<Solution> solutions = new ArrayList<>();
+
+        partialSolutions.enqueue(new Solution(width, height));
+
+        while (!(partialSolutions.isEmpty()))
+        {
+            Solution current = partialSolutions.dequeue();
+
+            if (current.isReady() && current.isSuccessful())
+            {
+                solutions.add(current);
+                System.out.println ("New solution found "+ System.nanoTime());
+            }
+            else
+            {
+                Solution current1 = new Solution (current);
+                Solution current2 = new Solution (current);
+
+                current1.setNext(true);
+                current2.setNext(false);
+
+                solutions.add(current1);
+                solutions.add(current2);
+            }
+        }
+        return solutions;        
     }
 
     /**
@@ -66,10 +90,23 @@ public class LightsOut {
     public static void main(String[] args) {
 
         StudentInfo.display();
+        //int width, height;
 
         //Your code here
-        
+        if (width == null || height == null) 
+        {
+            int width = 3;
+            int height = 3;
+        }
+
+        ArrayList<Solution> solutions = solve (width, height);
+
+        System.out.println ("The number of solutions is: "+solutions.size());
+        for (int i = 0; i < solutions.size(); i++)
+        {
+            System.out.println ("Solution "+i+1);
+            System.out.println (solutions.get(i));
+        }
+
     }
 }
-
-

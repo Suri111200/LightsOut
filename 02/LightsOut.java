@@ -53,12 +53,26 @@ public class LightsOut {
         {
             Solution current = partialSolutions.dequeue();
 
+       /*     try
+                {
+                Thread.sleep (1000);
+                }
+            catch (InterruptedException m)
+                {
+                ;
+                }
+        */
+            System.out.println(current);
+        
+            System.out.println(current.isReady()); 
+            System.out.println(current.isSuccessful());
+
             if (current.isReady() && current.isSuccessful())
             {
-                solutions.add(current);
+                solutions.add(partialSolutions.dequeue());
                 System.out.println ("New solution found "+ System.nanoTime());
             }
-            else
+            else if (!(current.isReady()))
             {
                 Solution current1 = new Solution (current);
                 Solution current2 = new Solution (current);
@@ -66,8 +80,15 @@ public class LightsOut {
                 current1.setNext(true);
                 current2.setNext(false);
 
-                solutions.add(current1);
-                solutions.add(current2);
+                System.out.println("your mom");
+                System.out.println(current1);
+                System.out.println("your dad");
+                System.out.println(current2);
+
+
+                partialSolutions.enqueue(current1);
+                partialSolutions.enqueue(current2);
+
             }
         }
         return solutions;        
@@ -111,7 +132,7 @@ public class LightsOut {
         System.out.println ("The number of solutions is: "+solutions.size());
         for (int i = 0; i < solutions.size(); i++)
         {
-            System.out.println ("Solution "+i+1);
+            System.out.println ("Solution "+(i+1));
             System.out.println (solutions.get(i));
         }
 

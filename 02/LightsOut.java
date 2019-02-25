@@ -90,13 +90,19 @@ public class LightsOut {
     public static void main(String[] args) {
 
         StudentInfo.display();
-        //int width, height;
+        int width, height;
 
         //Your code here
-        if (width == null || height == null) 
+
+        if (args.length == 2)
         {
-            int width = 3;
-            int height = 3;
+            width = Integer.parseInt(args[0]);
+            height = Integer.parseInt(args[1]);
+        }
+        else
+        {
+            width = 3;
+            height = 3;
         }
 
         ArrayList<Solution> solutions = solve (width, height);

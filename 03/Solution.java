@@ -3,13 +3,19 @@
  * The class <b>Solution</b> is used
  * to store a (partial) solution to the game
  *
- * @author Guy-Vincent Jourdan, University of Ottawa
+ * @ GVJ, Hrithik, Soorya all from uOttawa
  */
 public class Solution {
 
 
     // Your variables here
-
+    boolean [][] solHolder;
+    int iRow = 0;
+    int iCol = 0;
+    boolean ready = false;
+    int [][] selHolder;
+    private int width;
+    private int height;
 
     /**
      * Constructor. Creates an instance of Solution 
@@ -25,7 +31,15 @@ public class Solution {
     public Solution(int width, int height) {
 
         //Your code here
-        
+        this.width = width;
+        this.height = height;
+        solHolder = new boolean [height][width];
+        selHolder = new int [height][width];
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+                selHolder[i][j] = 0;
+        }
     }
 
    /**
@@ -39,7 +53,26 @@ public class Solution {
      public Solution(Solution other) {
 
         //Your code here
-        
+        this.width = other.width;
+        this.height = other.height;
+        this.iRow = other.iRow;
+        this.iCol = other.iCol;
+
+
+        this.solHolder = new boolean [height][width];
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+                this.solHolder[i][j] = other.solHolder[i][j];
+        }
+
+        this.selHolder = new int[height][width];
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+                this.selHolder[i][j] = other.selHolder[i][j];
+        }
+
     }
 
 
@@ -57,7 +90,22 @@ public class Solution {
     public boolean equals(Object other){
 
         //Your code here
-        
+        if (other == null || other.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Solution another;
+        another = (Solution) other;
+
+        for (int i = 0; i < this.solHolder.length; i++)
+        {
+            for (int j = 0; j < this.solHolder[i].length; j++)
+            {
+                if (this.solHolder[i][j] != another.solHolder[i][j])
+                    return false;
+            } 
+        }
+        return true;
     }
 
 
@@ -71,7 +119,7 @@ public class Solution {
     public boolean isReady(){
 
         //Your code here
-        
+        return ready;
     }
 
     /** 
@@ -94,7 +142,44 @@ public class Solution {
     public void setNext(boolean nextValue) {
 
         //Your code here
+        if (ready == false)
+        {
+            if (iRow < solHolder.length)
+            {
+                if (iCol < solHolder[iRow].length)
+                {
+                    solHolder[iRow][iCol] = nextValue;
+                    if (nextValue == true)
+                    {
+
+                        selHolder[iRow][iCol]++;
+
+                        if (iRow > 0)
+                            selHolder[iRow-1][iCol]++;
+                        if (iRow < solHolder.length - 1)
+                            selHolder[iRow+1][iCol]++;
+                        if (iCol > 0)
+                            selHolder[iRow][iCol-1]++;
+                        if (iCol < solHolder[iRow].length - 1)
+                            selHolder[iRow][iCol+1]++; 
+                    }
+
+                    iCol++;
+                    if (iCol == solHolder[iRow].length)
+                    {
+                        iCol = 0;
+                        iRow++;
+                    }
+                }
+            }
+        }
+        else
+            System.out.println ("Solution is already ready.");
         
+        if (iRow == solHolder.length)
+        {
+            ready = true;
+        }
     }
     
     /**
@@ -111,46 +196,15 @@ public class Solution {
     public boolean isSuccessful(){
 
         //Your code here
-        
-
-    }
-
-   /**
-    * this method ensure that add <b>nextValue</b> at the
-    * currentIndex does not make the current solution
-    * impossible. It assumes that the Solution was
-    * built with a series of setNext on which 
-    * stillPossible was always true.
-    * @param nextValue
-    *         The boolean value to add at currentIndex
-    * @return true if the board is not known to be
-    * impossible (which does not mean that the board
-    * is possible!)
-    */
-    public boolean stillPossible(boolean nextValue) {
-
-        //Your code here
-        
-
-    }
-
-
-    /**
-    * this method attempts to finish the board. 
-    * It assumes that the Solution was
-    * built with a series of setNext on which 
-    * stillPossible was always true. It cannot
-    * be called if the board can be extended 
-    * with both true and false and still be 
-    * possible.
-    *
-    * @return true if the board can be finished.
-    * the board is also completed
-    */
-    public boolean finish(){
-
-        //Your code here
-        
+        for (int i = 0; i < selHolder.length; i++)
+        {
+            for (int j = 0; j < selHolder[i].length; j++)
+            {
+                if (selHolder[i][j] % 2 == 0)
+                    return false;
+            } 
+        }
+        return true;
     }
 
 
@@ -163,8 +217,58 @@ public class Solution {
     public String toString() {
  
         //Your code here
+        String toreturn = "[[";
+        for (int i = 0; i < solHolder.length; i++)
+        {
+            for (int j = 0; j < solHolder[i].length; j++)
+            {
+                toreturn += solHolder[i][j];
+               // toreturn += selHolder[i][j];
+                if (j != solHolder[i].length-1)
+                    toreturn += ", ";
+            } 
+            if (i != solHolder.length-1)
+                toreturn += "],\n";
+        }
+        toreturn += "]]";
+
+        return toreturn;
+    }
+
+    public boolean stillPossible(boolean nextValue) {
+
+        Solution duplicate = new Solution(this);
+        duplicate.setNext(nextValue);
+        //Your code here
+        if (duplicate.iRow > 1)
+        {
+            for (int i = 0; i< (duplicate.iRow)-1; i++)
+            {
+                for(int j =0; j<duplicate.iCol; j++)
+                {
+                if (duplicate.selHolder[i][j] % 2 == 0)
+                    return false;    
+                }
+            }
+            for(int k=0; k< (duplicate.iCol)-1;k++)
+            {
+                if (duplicate.selHolder[iRow-1][k] % 2 == 0)
+                    return false;
+            }
+        }
+        else
+        {
+            for (int i = 0; i< (duplicate.iRow)-1; i++)
+            {
+                for (int j=0; j< (duplicate.iCol)-1; j++)
+                {
+                    if (duplicate.selHolder[i][j] % 2 == 0)
+                        return false;
+                }
+            }
+        }
+        return true;
         
     }
 
 }
-

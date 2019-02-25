@@ -16,9 +16,17 @@ public class StudentInfo {
     public static void display() {
 
         System.out.println("************************************************************");
+        System.out.println("*                       Hrithik Shah                       *");
+        System.out.println("*                        300069290                         *");
+        System.out.println("*                       ITI 1121 A                         *");
         System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
+        System.out.println("************************************************************");
+        System.out.println();
+
+        System.out.println("************************************************************");
+        System.out.println("*                   Soorya Saravanapavan                   *");
+        System.out.println("*                        300065226                         *");
+        System.out.println("*                       ITI 1121 A                         *");
         System.out.println("*                                                          *");
         System.out.println("************************************************************");
         System.out.println();

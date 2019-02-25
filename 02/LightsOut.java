@@ -44,6 +44,7 @@ public class LightsOut {
     public static ArrayList<Solution> solve(int width, int height){
 
         //Your code here
+        long startTime = (long)System.nanoTime();
         partialSolutions = new ArrayListSolutionQueue();
         ArrayList<Solution> solutions = new ArrayList<>();
 
@@ -62,12 +63,12 @@ public class LightsOut {
                 ;
                 }
         */
-            System.out.println(current);
+            //System.out.println(current);
 
             if (current.isReady() && current.isSuccessful())
             {
-                solutions.add(partialSolutions.dequeue());
-                System.out.println ("New solution found "+ System.nanoTime());
+                solutions.add(current);
+                System.out.println ("New solution found in "+ (((long)System.nanoTime() - startTime)/1000000)+" ms");
             }
             else if (!(current.isReady()))
             {
@@ -76,7 +77,7 @@ public class LightsOut {
                 {
                 Solution current1 = new Solution (current);
                 current1.setNext(true);
-                System.out.println(current1);                    
+                //System.out.println(current1);                    
                 partialSolutions.enqueue(current1);
                 }
                 
@@ -86,7 +87,7 @@ public class LightsOut {
 
                 Solution current2 = new Solution (current);
                 current2.setNext(false);
-                System.out.println(current2);
+                //System.out.println(current2);
                 partialSolutions.enqueue(current2);
 
                 }
@@ -126,7 +127,6 @@ public class LightsOut {
             width = 3;
             height = 3;
         }
-
 
         ArrayList<Solution> solutions = solve (width, height);
 

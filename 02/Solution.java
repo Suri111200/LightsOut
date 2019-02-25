@@ -244,7 +244,7 @@ public class Solution {
         {
             for (int i = 0; i< (duplicate.iRow)-1; i++)
             {
-                for(int j =0; j<duplicate.iCol; j++)
+                for(int j =0; j<duplicate.solHolder[0].length; j++)
                 {
                 if (duplicate.selHolder[i][j] % 2 == 0)
                     return false;    

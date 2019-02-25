@@ -14,6 +14,8 @@ public class Solution {
     int iCol = 0;
     boolean ready = false;
     int [][] selHolder;
+    private int width;
+    private int height;
 
     /**
      * Constructor. Creates an instance of Solution 
@@ -29,6 +31,8 @@ public class Solution {
     public Solution(int width, int height) {
 
         //Your code here
+        this.width = width;
+        this.height = height;
         solHolder = new boolean [height][width];
         selHolder = new int [height][width];
         for (int i = 0; i < height; i++)
@@ -49,12 +53,26 @@ public class Solution {
      public Solution(Solution other) {
 
         //Your code here
-        this.solHolder = new boolean [other.solHolder.length][other.solHolder[0].length];
-        for (int i = 0; i < other.solHolder.length; i++)
+        this.width = other.width;
+        this.height = other.height;
+        this.iRow = other.iRow;
+        this.iCol = other.iCol;
+
+
+        this.solHolder = new boolean [height][width];
+        for (int i = 0; i < height; i++)
         {
-            for (int j = 0; j < other.solHolder[0].length; j++)
+            for (int j = 0; j < width; j++)
                 this.solHolder[i][j] = other.solHolder[i][j];
         }
+
+        this.selHolder = new int[height][width];
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+                this.selHolder[i][j] = other.selHolder[i][j];
+        }
+
     }
 
 
@@ -133,7 +151,9 @@ public class Solution {
                     solHolder[iRow][iCol] = nextValue;
                     if (nextValue == true)
                     {
+
                         selHolder[iRow][iCol]++;
+
                         if (iRow > 0)
                             selHolder[iRow-1][iCol]++;
                         if (iRow < solHolder.length - 1)
@@ -203,7 +223,7 @@ public class Solution {
             for (int j = 0; j < solHolder[i].length; j++)
             {
                 toreturn += solHolder[i][j];
-                toreturn += selHolder[i][j];
+               // toreturn += selHolder[i][j];
                 if (j != solHolder[i].length-1)
                     toreturn += ", ";
             } 

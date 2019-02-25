@@ -105,6 +105,7 @@ public class LightsOut {
             height = 3;
         }
 
+
         ArrayList<Solution> solutions = solve (width, height);
 
         System.out.println ("The number of solutions is: "+solutions.size());

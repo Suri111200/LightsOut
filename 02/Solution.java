@@ -237,27 +237,34 @@ public class Solution {
 
     public boolean stillPossible(boolean nextValue) {
 
-        Solution duplicate = new Solution(this.solution);
+        Solution duplicate = new Solution(this);
         duplicate.setNext(nextValue);
         //Your code here
         if (duplicate.iRow > 1)
         {
-            for (int i = 0; i< (duplicate.iRow)-1; i++){
-                for(int j =0; j<duplicate.iRow[0].length; j++){
+            for (int i = 0; i< (duplicate.iRow)-1; i++)
+            {
+                for(int j =0; j<duplicate.iCol; j++)
+                {
                 if (duplicate.selHolder[i][j] % 2 == 0)
                     return false;    
                 }
             }
-            for(int k=0; k< (duplicate.iCol)-1;k++){
-                if (duplicate.selHolder[iRow-1][j] % 2 == 0)
+            for(int k=0; k< (duplicate.iCol)-1;k++)
+            {
+                if (duplicate.selHolder[iRow-1][k] % 2 == 0)
                     return false;
             }
         }
-        else{
-            for (int i = 0; i< (duplicate.iRow)-1; i++){
-                for (int j=0; j< (duplicate.iCol)-1; j++){
+        else
+        {
+            for (int i = 0; i< (duplicate.iRow)-1; i++)
+            {
+                for (int j=0; j< (duplicate.iCol)-1; j++)
+                {
                     if (duplicate.selHolder[i][j] % 2 == 0)
                         return false;
+                }
             }
         }
         return true;

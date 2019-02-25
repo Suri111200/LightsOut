@@ -63,9 +63,6 @@ public class LightsOut {
                 }
         */
             System.out.println(current);
-        
-            System.out.println(current.isReady()); 
-            System.out.println(current.isSuccessful());
 
             if (current.isReady() && current.isSuccessful())
             {
@@ -74,21 +71,25 @@ public class LightsOut {
             }
             else if (!(current.isReady()))
             {
+                if (current.stillPossible(true))
+                
+                {
                 Solution current1 = new Solution (current);
-                Solution current2 = new Solution (current);
-
                 current1.setNext(true);
-                current2.setNext(false);
-
-                System.out.println("your mom");
-                System.out.println(current1);
-                System.out.println("your dad");
-                System.out.println(current2);
-
-
+                System.out.println(current1);                    
                 partialSolutions.enqueue(current1);
+                }
+                
+                if (current.stillPossible(false))
+                
+                {
+
+                Solution current2 = new Solution (current);
+                current2.setNext(false);
+                System.out.println(current2);
                 partialSolutions.enqueue(current2);
 
+                }
             }
         }
         return solutions;        

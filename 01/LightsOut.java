@@ -63,14 +63,11 @@ public class LightsOut {
                 }
         */
             System.out.println(current);
-        
-            System.out.println(current.isReady()); 
-            System.out.println(current.isSuccessful());
 
             if (current.isReady() && current.isSuccessful())
             {
                 solutions.add(partialSolutions.dequeue());
-                System.out.println ("New solution found "+ System.nanoTime());
+                System.out.println ("New solution found in "+ (System.nanoTime()-startTime)+" ms");
             }
             else if (!(current.isReady()))
             {
@@ -80,9 +77,7 @@ public class LightsOut {
                 current1.setNext(true);
                 current2.setNext(false);
 
-                System.out.println("your mom");
                 System.out.println(current1);
-                System.out.println("your dad");
                 System.out.println(current2);
 
 
@@ -126,7 +121,7 @@ public class LightsOut {
             height = 3;
         }
 
-
+        int startTime = System.nanoTime();
         ArrayList<Solution> solutions = solve (width, height);
 
         System.out.println ("The number of solutions is: "+solutions.size());

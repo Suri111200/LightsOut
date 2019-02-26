@@ -271,4 +271,31 @@ public class Solution {
         
     }
 
+    public boolean finish ()
+    {
+        Solution duplicate = new Solution(this);
+
+        while (!(duplicate.isReady()))
+        {
+            if (duplicate.stillPossible(true))
+            {
+                duplicate.setNext(true);
+            }
+            else if (duplicate.stillPossible(false))
+            {
+                duplicate.setNext(false);
+            }
+            else 
+                return false;            
+        }
+
+        if (!duplicate.isSuccessful())
+                return false;
+
+        return true;
+
+
+
+    }
+
 }

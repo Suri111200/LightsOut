@@ -68,7 +68,7 @@ public class LightsOut {
             if (current.isReady() && current.isSuccessful())
             {
                 solutions.add(current);
-                System.out.println ("New solution found in "+ ((startTime - System.nanoTime())/1000000)+" ms");
+                System.out.println ("New solution found in "+ ((System.nanoTime()- startTime)/1000000)+" ms");
             }
             else if (!(current.isReady()))
             {

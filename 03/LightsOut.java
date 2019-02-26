@@ -76,19 +76,36 @@ public class LightsOut {
                 {
                     if (current.finish())
                     {
-                        System.out.println("hi");
+                        //System.out.println("hi");
                         Solution current1 = new Solution (current);
                         current1.setNext(true);
                         //System.out.println(current1);                    
                         partialSolutions.enqueue(current1);
                     }
+                    else
+                    {
+                        //System.out.println("hi");
+                        Solution current1 = new Solution (current);
+                        current1.setNext(true);
+                        //System.out.println(current1);                    
+                        partialSolutions.enqueue(current1);
+                    }
+
                 }
                 
                 if (current.stillPossible(false))
                 {
                     if (current.finish())
                     {
-                        System.out.println("hi");
+                        //System.out.println("hi");
+                        Solution current2 = new Solution (current);
+                        current2.setNext(false);
+                        //System.out.println(current1);                    
+                        partialSolutions.enqueue(current2);
+                    }
+                    else
+                    {
+                        // System.out.println("hi");
                         Solution current2 = new Solution (current);
                         current2.setNext(false);
                         //System.out.println(current1);                    

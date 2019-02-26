@@ -277,20 +277,29 @@ public class Solution {
 
         while (!(duplicate.isReady()))
         {
+            //System.out.println("hi2");
             if (duplicate.stillPossible(true))
             {
+                //System.out.println("hi3");
                 duplicate.setNext(true);
             }
             else if (duplicate.stillPossible(false))
             {
+                ///System.out.println("hi4");
                 duplicate.setNext(false);
             }
             else 
+            {
+                //System.out.println("hi5");
                 return false;            
+            }
         }
 
         if (!duplicate.isSuccessful())
+        {
+            //System.out.println("hi6");
                 return false;
+        }
 
         return true;
 
